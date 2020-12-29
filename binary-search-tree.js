@@ -202,7 +202,22 @@ class BinarySearchTree {
    * isBalanced(): Returns true if the BST is balanced, false otherwise. */
 
   isBalanced() {
+    let vals = []
+    
+    function _balancedHelper(node){
+      if(node === null) return vals
+      if (node.left) _balancedHelper(node.left)
+      vals.push(node.val);
+      if (node.right) _balancedHelper(node.right)
+      return vals
+    }
 
+    const valsLeft = _balancedHelper(this.root.left)
+    vals = []
+    const valsRight = _balancedHelper(this.root.right)
+    if(valsRight.length + 1 === valsLeft.length || valsRight.length - 1 === valsLeft.length || valsRight.length === valsLeft.length) return true 
+
+    return false
   }
 
   /** Further Study!
