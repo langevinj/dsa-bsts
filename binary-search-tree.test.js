@@ -239,7 +239,6 @@ describe("remove", function() {
       .insert(88)
       .insert(93)
       .insert(89);
-
     binarySearchTree.remove(85);
     expect(binarySearchTree.root.right.right.val).toBe(88); // 88
     expect(binarySearchTree.root.right.right.right.left.left.val).toBe(89); // 89

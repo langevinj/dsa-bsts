@@ -160,7 +160,42 @@ class BinarySearchTree {
    * Returns the removed node. */
 
   remove(val) {
+    //get the soughtnode by value, and thus also its children
+    let soughtNode = this.find(val);
 
+    //find the parent node of the sought value
+    function _findParent(node) {
+      if(node.left === soughtNode || node.right === soughtNode) return node;
+
+      return soughtNode.val < node.val ? _findParent(node.left) : _findParent(node.right)
+    }
+
+    //adjust the children of the parent to account for node removal
+    function _removeHelper(parent, soughtNode) {
+
+      //if the node has no children
+      if(!soughtNode.left && !soughtNode.right){
+        parent.left === soughtNode ? parent.left = null : parent.right = null;
+      } else if (soughtNode.left && soughtNode.right) {
+        //handle if node being removed has two children
+        console.log(parent)
+        if (parent.left === soughtNode) {
+          parent.left.val = soughtNode.right.val
+          parent.left.right = null;
+        } else {
+          parent.right.val = soughtNode.right.val
+          parent.right.right = null;
+        }
+      } else {
+        //handle if node being removed has one child
+        parent.left === soughtNode ? parent.left = soughtNode.left || soughtNode.right : parent.right = soughtNode.left || soughtNode.right
+      }
+    }
+
+    let parent = _findParent(this.root)
+    _removeHelper(parent, soughtNode)
+    console.log(parent)
+    return soughtNode
   }
 
   /** Further Study!
