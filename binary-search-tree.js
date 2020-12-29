@@ -225,7 +225,20 @@ class BinarySearchTree {
    * Otherwise return undefined. */
 
   findSecondHighest() {
-    
+    if(this.root === null) return undefined;
+
+    let currHigh = this.root.val;
+    let currSecHigh = this.root.val; 
+
+    function traverse(node){
+      if(node === null) return currSecHigh
+      if(node.val > currHigh) currHigh = node.val;
+      if(node.val < currHigh && node.val > currSecHigh) currSecHigh = node.val
+      if(node.right) traverse(node.right)
+    }
+
+    traverse(this.root);
+    return currSecHigh;
   }
 }
 
