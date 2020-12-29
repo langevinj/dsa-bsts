@@ -240,6 +240,30 @@ class BinarySearchTree {
     traverse(this.root);
     return currSecHigh;
   }
+
+  /**dfsInOrderIterative(): Traverse the arry using in-order DFS return an array of visited nodes */
+  dfsInOrderIterative() {
+    const vals = []
+    let toVisitQueue = []
+    let current = this.root;
+
+    while(current.left) {
+      toVisitQueue.push(current.left)
+      current = current.left
+    }
+
+    toVisitQueue.push(this.root)
+    current = this.root;
+
+    while(current.right) {
+      toVisitQueue.push(current.right)
+      current = current.right
+    }
+
+    console.log(toVisitQueue)
+
+
+  }
 }
 
 module.exports = BinarySearchTree;
